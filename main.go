@@ -31,6 +31,25 @@ func (g *Game) Update() error {
 		g.topPaddlePosX += -g.paddleSpeed
 		g.btmPaddlePosX += g.paddleSpeed
 	}
+
+	const padding = 16
+
+	// clamp top paddle
+	if g.topPaddlePosX < padding {
+		g.topPaddlePosX = padding
+	}
+	if g.topPaddlePosX+g.topPaddleWidth > float32(screenW-padding) {
+		g.topPaddlePosX = float32(screenW) - g.topPaddleWidth - padding
+	}
+
+	// clamp bottom paddle
+	if g.btmPaddlePosX < padding {
+		g.btmPaddlePosX = padding
+	}
+	if g.btmPaddlePosX+g.btmPaddleWidth > float32(screenW-padding) {
+		g.btmPaddlePosX = float32(screenW) - g.btmPaddleWidth - padding
+	}
+
 	return nil
 }
 
