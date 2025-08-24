@@ -17,6 +17,13 @@ type Game struct {
 }
 
 func (g *Game) Update() error {
+	if ebiten.IsKeyPressed(ebiten.KeyK) {
+		g.topPaddlePosX += g.paddleSpeed
+		g.btmPaddlePosX += -g.paddleSpeed
+	} else if ebiten.IsKeyPressed(ebiten.KeyJ) {
+		g.topPaddlePosX += -g.paddleSpeed
+		g.btmPaddlePosX += g.paddleSpeed
+	}
 	return nil
 }
 
