@@ -1,10 +1,11 @@
 package main
 
 import (
+	"image/color"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
 type Game struct {
@@ -20,7 +21,10 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	ebitenutil.DebugPrint(screen, "Hello, World!")
+	screen.Fill(color.RGBA{20, 20, 20, 0})
+
+	vector.DrawFilledRect(screen, g.topPaddlePosX, g.topPaddlePosY, g.topPaddleWidth, g.topPaddleHeight, color.White, true)
+	vector.DrawFilledRect(screen, g.btmPaddlePosX, g.btmPaddlePosY, g.btmPaddleWidth, g.btmPaddleHeight, color.White, true)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
