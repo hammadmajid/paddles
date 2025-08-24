@@ -56,8 +56,34 @@ func (g *Game) Update() error {
 		g.btmPaddlePosX = float32(screenW) - g.btmPaddleWidth - padding
 	}
 
-	// g.targetX += g.targetVX
-	// g.targetY += g.targetVY
+	g.targetX += g.targetVX
+	g.targetY += g.targetVY
+
+	// bounce left/right walls
+	if g.targetX < padding {
+		g.targetX = padding
+		g.targetVX = -g.targetVX
+	}
+	if g.targetX+g.targetSize > float32(screenW-padding) {
+		g.targetX = float32(screenW-padding) - g.targetSize
+		g.targetVX = -g.targetVX
+	}
+
+	// bounce top paddle
+	if g.targetY <= g.topPaddlePosY+g.topPaddleHeight &&
+		g.targetX+g.targetSize >= g.topPaddlePosX &&
+		g.targetX <= g.topPaddlePosX+g.topPaddleWidth {
+		g.targetY = g.topPaddlePosY + g.topPaddleHeight
+		g.targetVY = -g.targetVY
+	}
+
+	// bounce bottom paddle
+	if g.targetY+g.targetSize >= g.btmPaddlePosY &&
+		g.targetX+g.targetSize >= g.btmPaddlePosX &&
+		g.targetX <= g.btmPaddlePosX+g.btmPaddleWidth {
+		g.targetY = g.btmPaddlePosY - g.targetSize
+		g.targetVY = -g.targetVY
+	}
 
 	return nil
 }
