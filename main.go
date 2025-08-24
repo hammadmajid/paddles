@@ -7,7 +7,13 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-type Game struct{}
+type Game struct {
+	topPaddlePosX, topPaddlePosY    float32 // top paddle position
+	topPaddleWidth, topPaddleHeight float32 // top paddle size
+	btmPaddlePosX, btmPaddlePosY    float32 // bottom paddle position
+	btmPaddleWidth, btmPaddleHeight float32 // bottom paddle size
+	paddleSpeed                     float32 // movement speed of both paddles
+}
 
 func (g *Game) Update() error {
 	return nil
@@ -24,7 +30,17 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func main() {
 	ebiten.SetWindowSize(640, 480)
 	ebiten.SetWindowTitle("Hello, World!")
-	if err := ebiten.RunGame(&Game{}); err != nil {
+	if err := ebiten.RunGame(&Game{
+		topPaddlePosX:   20,
+		topPaddlePosY:   10,
+		topPaddleWidth:  32,
+		topPaddleHeight: 8,
+		btmPaddlePosX:   20,
+		btmPaddlePosY:   100,
+		btmPaddleWidth:  32,
+		btmPaddleHeight: 8,
+		paddleSpeed:     3,
+	}); err != nil {
 		log.Fatal(err)
 	}
 }
