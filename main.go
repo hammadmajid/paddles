@@ -18,9 +18,15 @@ const (
 type Game struct {
 	topPaddlePosX, topPaddlePosY    float32 // top paddle position
 	topPaddleWidth, topPaddleHeight float32 // top paddle size
+
 	btmPaddlePosX, btmPaddlePosY    float32 // bottom paddle position
 	btmPaddleWidth, btmPaddleHeight float32 // bottom paddle size
-	paddleSpeed                     float32 // movement speed of both paddles
+
+	paddleSpeed float32 // movement speed of both paddles
+
+	targetX, targetY   float32 // target position
+	targetVX, targetVY float32 // target velocity
+	targetSize         float32 // target size
 }
 
 func (g *Game) Update() error {
@@ -50,6 +56,9 @@ func (g *Game) Update() error {
 		g.btmPaddlePosX = float32(screenW) - g.btmPaddleWidth - padding
 	}
 
+	// g.targetX += g.targetVX
+	// g.targetY += g.targetVY
+
 	return nil
 }
 
@@ -58,6 +67,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	vector.DrawFilledRect(screen, g.topPaddlePosX, g.topPaddlePosY, g.topPaddleWidth, g.topPaddleHeight, color.White, true)
 	vector.DrawFilledRect(screen, g.btmPaddlePosX, g.btmPaddlePosY, g.btmPaddleWidth, g.btmPaddleHeight, color.White, true)
+
+	vector.DrawFilledRect(screen, g.targetX, g.targetY, g.targetSize, g.targetSize, color.RGBA{200, 0, 0, 255}, true)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
@@ -73,10 +84,18 @@ func main() {
 		topPaddleWidth:  paddleW,
 		topPaddleHeight: paddleH,
 		btmPaddlePosX:   screenW / 2,
+
 		btmPaddlePosY:   float32(screenH) - paddleH - (0.05 * float32(screenH)),
 		btmPaddleWidth:  paddleW,
 		btmPaddleHeight: paddleH,
-		paddleSpeed:     3,
+
+		paddleSpeed: 3,
+
+		targetX:    float32(screenW/2 - 4),
+		targetY:    float32(screenH/2 - 4),
+		targetVX:   1.5,
+		targetVY:   2.5,
+		targetSize: 8,
 	}); err != nil {
 		log.Fatal(err)
 	}
