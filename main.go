@@ -8,6 +8,13 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
+const (
+	screenW = 640.0
+	screenH = 480.0
+	paddleW = 64
+	paddleH = 12
+)
+
 type Game struct {
 	topPaddlePosX, topPaddlePosY    float32 // top paddle position
 	topPaddleWidth, topPaddleHeight float32 // top paddle size
@@ -35,21 +42,21 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 320, 240
+	return screenW, screenH
 }
 
 func main() {
-	ebiten.SetWindowSize(640, 480)
+	ebiten.SetWindowSize(screenW, screenH)
 	ebiten.SetWindowTitle("Hello, World!")
 	if err := ebiten.RunGame(&Game{
-		topPaddlePosX:   20,
-		topPaddlePosY:   10,
-		topPaddleWidth:  32,
-		topPaddleHeight: 8,
-		btmPaddlePosX:   20,
-		btmPaddlePosY:   100,
-		btmPaddleWidth:  32,
-		btmPaddleHeight: 8,
+		topPaddlePosX:   screenW / 2,
+		topPaddlePosY:   0.05 * float32(screenH),
+		topPaddleWidth:  paddleW,
+		topPaddleHeight: paddleH,
+		btmPaddlePosX:   screenW / 2,
+		btmPaddlePosY:   float32(screenH) - paddleH - (0.05 * float32(screenH)),
+		btmPaddleWidth:  paddleW,
+		btmPaddleHeight: paddleH,
 		paddleSpeed:     3,
 	}); err != nil {
 		log.Fatal(err)
