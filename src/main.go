@@ -9,12 +9,10 @@ import (
 )
 
 const (
-	screenW  = 640.0
-	screenH  = 480.0
-	hPaddleW = 64
-	hPaddleH = 12
-	vPaddleW = 12
-	vPaddleH = 64
+	screenW = 640.0
+	screenH = 480.0
+	paddleW = 64
+	paddleH = 12
 )
 
 type Game struct {
@@ -81,28 +79,28 @@ func main() {
 	ebiten.SetWindowTitle("Paddles")
 	if err := ebiten.RunGame(&Game{
 		top: Paddle{
-			X: screenW/2 - hPaddleW/2, // center horizontally
-			Y: 0.05 * screenH,         // near the top
-			W: hPaddleW,
-			H: hPaddleH,
+			X: screenW/2 - paddleW/2, // center horizontally
+			Y: 0.05 * screenH,        // near the top
+			W: paddleW,
+			H: paddleH,
 		},
 		right: Paddle{
-			X: screenW - 0.05*screenW - hPaddleH, // near right edge
-			Y: screenH/2 - hPaddleW/2,            // centered vertically
-			W: hPaddleH,
-			H: hPaddleW,
+			X: screenW - 0.05*screenW - paddleH, // near right edge
+			Y: screenH/2 - paddleW/2,            // centered vertically
+			W: paddleH,
+			H: paddleW,
 		},
 		bottom: Paddle{
-			X: screenW/2 - hPaddleW/2,            // center horizontally
-			Y: screenH - 0.05*screenH - hPaddleH, // near the bottom
-			W: hPaddleW,
-			H: hPaddleH,
+			X: screenW/2 - paddleW/2,            // center horizontally
+			Y: screenH - 0.05*screenH - paddleH, // near the bottom
+			W: paddleW,
+			H: paddleH,
 		},
 		left: Paddle{
-			X: 0.05 * screenW,         // near left edge
-			Y: screenH/2 - hPaddleW/2, // centered vertically
-			W: hPaddleH,
-			H: hPaddleW,
+			X: 0.05 * screenW,        // near left edge
+			Y: screenH/2 - paddleW/2, // centered vertically
+			W: paddleH,
+			H: paddleW,
 		},
 
 		paddleSpeed: 3,
