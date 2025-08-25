@@ -5,21 +5,21 @@ type Paddle struct {
 	W, H float32
 }
 
-func NewPaddle(x, y float32) Paddle {
-	return Paddle{
-		X: x - paddleW/2, // center horizontally on given x
-		Y: y,
-		W: paddleW,
-		H: paddleH,
+func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
+	// Horizontal clamp
+	if p.X < paddingX {
+		p.X = paddingX
 	}
-}
+	if p.X+p.W > screenW-paddingX {
+		p.X = screenW - p.W - paddingX
+	}
 
-func (p *Paddle) Clamp(screenW float32, padding float32) {
-	if p.X < padding {
-		p.X = padding
+	// Vertical clamp
+	if p.Y < paddingY {
+		p.Y = paddingY
 	}
-	if p.X+p.W > screenW-padding {
-		p.X = screenW - p.W - padding
+	if p.Y+p.H > screenH-paddingY {
+		p.Y = screenH - p.H - paddingY
 	}
 }
 
