@@ -22,7 +22,18 @@ func (b *Ball) CheckHorizontalPaddle(p Paddle, fromTop bool) {
 		} else {
 			b.Y = p.Y - b.Size
 		}
+
+		// Add influence based on paddle velocity
+		velocityInfluence := p.VX * 0.3 // scale factor for influence
 		b.VY = -b.VY
+		b.VX += velocityInfluence // impart horizontal velocity based on paddle movement
+
+		// Clamp ball velocity to prevent excessive speeds
+		if b.VX > 4.0 {
+			b.VX = 4.0
+		} else if b.VX < -4.0 {
+			b.VX = -4.0
+		}
 	}
 }
 
@@ -37,6 +48,17 @@ func (b *Ball) CheckVerticalPaddle(p Paddle, fromLeft bool) {
 		} else {
 			b.X = p.X - b.Size
 		}
+
+		// Add influence based on paddle velocity
+		velocityInfluence := p.VY * 0.3 // scale factor for influence
 		b.VX = -b.VX
+		b.VY += velocityInfluence // impart vertical velocity based on paddle movement
+
+		// Clamp ball velocity to prevent excessive speeds
+		if b.VY > 4.0 {
+			b.VY = 4.0
+		} else if b.VY < -4.0 {
+			b.VY = -4.0
+		}
 	}
 }

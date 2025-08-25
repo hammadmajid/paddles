@@ -1,8 +1,9 @@
 package main
 
 type Paddle struct {
-	X, Y float32
-	W, H float32
+	X, Y   float32
+	W, H   float32
+	VX, VY float32 // velocity for collision influence
 }
 
 // Clamp the movement of paddle to screen width and height

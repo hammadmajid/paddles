@@ -27,6 +27,12 @@ type Game struct {
 }
 
 func (g *Game) Update() error {
+	// Store previous positions to calculate velocity
+	topOldX := g.top.X
+	rightOldY := g.right.Y
+	bottomOldX := g.bottom.X
+	leftOldY := g.left.Y
+
 	if ebiten.IsKeyPressed(ebiten.KeyK) {
 		g.top.X += g.paddleSpeed
 		g.right.Y += g.paddleSpeed
@@ -49,7 +55,16 @@ func (g *Game) Update() error {
 	g.bottom.Clamp(screenW, screenH, padding, padding)
 	g.left.Clamp(screenW, screenH, padding, padding)
 
-	// ball movment and bounce
+	// Calculate paddle velocities
+	g.top.VX = g.top.X - topOldX
+	g.top.VY = 0
+	g.right.VX = 0
+	g.right.VY = g.right.Y - rightOldY
+	g.bottom.VX = g.bottom.X - bottomOldX
+	g.bottom.VY = 0
+	g.left.VX = 0
+	g.left.VY = g.left.Y - leftOldY
+
 	// ball movement and bounce
 	g.ball.Move()
 	g.ball.CheckHorizontalPaddle(g.top, true)
