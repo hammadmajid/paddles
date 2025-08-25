@@ -61,16 +61,17 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{20, 20, 20, 0})
+	screen.Fill(color.RGBA{R: 20, G: 20, B: 20})
 
 	vector.DrawFilledRect(screen, g.top.X, g.top.Y, g.top.W, g.top.H, color.White, true)
 	vector.DrawFilledRect(screen, g.right.X, g.right.Y, g.right.W, g.right.H, color.White, true)
 	vector.DrawFilledRect(screen, g.bottom.X, g.bottom.Y, g.bottom.W, g.bottom.H, color.White, true)
 	vector.DrawFilledRect(screen, g.left.X, g.left.Y, g.left.W, g.left.H, color.White, true)
 
-	vector.DrawFilledRect(screen, g.ball.X, g.ball.Y, g.ball.Size, g.ball.Size, color.RGBA{200, 0, 0, 255}, true)
+	vector.DrawFilledRect(screen, g.ball.X, g.ball.Y, g.ball.Size, g.ball.Size, color.RGBA{R: 200}, true)
 }
 
+//goland:noinspection GoUnusedParameter
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return screenW, screenH
 }
