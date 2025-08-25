@@ -1,4 +1,4 @@
-module github.com/hammadmajid/pong
+module github.com/hammadmajid/paddle
 
 go 1.24.6
 

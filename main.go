@@ -78,7 +78,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 
 func main() {
 	ebiten.SetWindowSize(screenW, screenH)
-	ebiten.SetWindowTitle("Hello, World!")
+	ebiten.SetWindowTitle("Paddles")
 	if err := ebiten.RunGame(&Game{
 		top: Paddle{
 			X: screenW/2 - hPaddleW/2, // center horizontally
