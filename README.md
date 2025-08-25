@@ -1,9 +1,8 @@
-# Pong Game
+# Paddles
 
 A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 
 <img width="762" height="639" alt="image" src="https://github.com/user-attachments/assets/163a1838-ebe0-4cb1-81b4-1421c943a00e" />
-
 
 ## Features
 
@@ -19,8 +18,8 @@ A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/hammadmajid/pong.git
-   cd pong
+   git clone https://github.com/hammadmajid/paddles.git
+   cd paddles
    ```
 
 2. Install dependencies:
@@ -31,13 +30,13 @@ A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 ## Running the Game
 
 ```bash
-go run .
+go run ./src
 ```
 
 Or build and run:
 ```bash
-go build
-./pong
+go build -o paddles ./src
+./paddles
 ```
 
 ## Controls
@@ -49,8 +48,6 @@ go build
 
 - **Format code**: `go fmt ./...`
 - **Lint**: `go vet ./...`
-- **Build**: `go build`
-- **Run tests**: `go test ./...`
 
 ## License
 
