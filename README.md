@@ -6,14 +6,10 @@ A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 
 ## Controls
 
-- **W + ←**: Move top paddle left
-- **W + →**: Move top paddle right
-- **A + ↑**: Move left paddle up
-- **A + ↓**: Move left paddle down
-- **S + ←**: Move bottom paddle left
-- **S + →**: Move bottom paddle right
-- **D + ↑**: Move right paddle up
-- **D + ↓**: Move right paddle down
+- `A | D`: Move top paddle left/right
+- `↑ | ↓`: Move right paddle up/down
+- `← | →`: Move bottom paddle left/right
+- `W | S`: Move left paddle up/down
 
 ## Requirements
 
