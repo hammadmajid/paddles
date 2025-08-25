@@ -4,10 +4,16 @@ A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 
 <img width="762" height="639" alt="image" src="https://github.com/user-attachments/assets/163a1838-ebe0-4cb1-81b4-1421c943a00e" />
 
-## Features
+## Controls
 
-- Single player Pong with paddles on all four sides of the screen
-- Simple keyboard controls (J/K keys)
+- **W + ←**: Move top paddle left
+- **W + →**: Move top paddle right
+- **A + ↑**: Move left paddle up
+- **A + ↓**: Move left paddle down
+- **S + ←**: Move bottom paddle left
+- **S + →**: Move bottom paddle right
+- **D + ↑**: Move right paddle up
+- **D + ↓**: Move right paddle down
 
 ## Requirements
 
@@ -38,11 +44,6 @@ Or build and run:
 go build -o paddles ./src
 ./paddles
 ```
-
-## Controls
-
-- **J**: Move paddles counterclockwise
-- **K**: Move paddles clockwise
 
 ## Development
 
