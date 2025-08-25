@@ -17,7 +17,7 @@ type Play struct {
 	ball Ball
 }
 
-func (p *Play) Update() {
+func (p *Play) Update() bool {
 	// Store previous positions to calculate velocity
 	topOldX := p.top.X
 	rightOldY := p.right.Y
@@ -59,6 +59,8 @@ func (p *Play) Update() {
 	p.ball.CheckHorizontalPaddle(p.bottom, false)
 	p.ball.CheckVerticalPaddle(p.left, true)
 	p.ball.CheckVerticalPaddle(p.right, false)
+
+	return p.ball.CheckWalls(screenW, screenH, padding)
 }
 
 func (p *Play) Draw(screen *ebiten.Image) {

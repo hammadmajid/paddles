@@ -62,3 +62,32 @@ func (b *Ball) CheckVerticalPaddle(p Paddle, fromLeft bool) {
 		}
 	}
 }
+
+// CheckWalls return true and resets the ball position if it touches any wall
+func (b *Ball) CheckWalls(screenW, screenH, padding float32) bool {
+	wall := false
+	// Left wall
+	if b.X < padding {
+		wall = true
+	}
+	// Right wall
+	if b.X+b.Size > screenW-padding {
+		wall = true
+	}
+	// Top wall
+	if b.Y < padding {
+		wall = true
+	}
+	// Bottom wall
+	if b.Y+b.Size > screenH-padding {
+		wall = true
+	}
+
+	// Reset position if wall is reached for next game
+	if wall {
+		b.X = screenW / 2
+		b.Y = screenH / 2
+	}
+
+	return wall
+}
