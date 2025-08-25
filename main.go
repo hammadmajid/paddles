@@ -53,10 +53,10 @@ func (g *Game) Update() error {
 
 	// ball movment and bounce
 	g.ball.Move()
-	g.ball.CheckPaddle(g.top, true)
-	g.ball.CheckPaddle(g.right, true)
-	g.ball.CheckPaddle(g.bottom, false)
-	g.ball.CheckPaddle(g.left, false)
+	g.ball.CheckHorizontalPaddle(g.top, true)
+	g.ball.CheckHorizontalPaddle(g.bottom, false)
+	g.ball.CheckVerticalPaddle(g.left, true)
+	g.ball.CheckVerticalPaddle(g.right, false)
 
 	return nil
 }
