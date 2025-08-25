@@ -1,9 +1,31 @@
 package main
 
+import "github.com/hajimehoshi/ebiten/v2"
+
 type Paddle struct {
 	X, Y   float32
 	W, H   float32
 	VX, VY float32 // velocity for collision influence
+}
+
+type Controls struct {
+	NegX, PosX ebiten.Key // horizontal keys
+	NegY, PosY ebiten.Key // vertical keys
+}
+
+func (p *Paddle) Move(ctrl Controls) {
+	if ebiten.IsKeyPressed(ctrl.NegX) {
+		p.X -= 3
+	}
+	if ebiten.IsKeyPressed(ctrl.PosX) {
+		p.X += 3
+	}
+	if ebiten.IsKeyPressed(ctrl.NegY) {
+		p.Y -= 3
+	}
+	if ebiten.IsKeyPressed(ctrl.PosY) {
+		p.Y += 3
+	}
 }
 
 // Clamp the movement of paddle to screen width and height

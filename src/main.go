@@ -33,19 +33,16 @@ func (g *Game) Update() error {
 	bottomOldX := g.bottom.X
 	leftOldY := g.left.Y
 
-	if ebiten.IsKeyPressed(ebiten.KeyK) {
-		g.top.X += g.paddleSpeed
-		g.right.Y += g.paddleSpeed
+	// assign keys to control each paddle
+	topControls := Controls{NegX: ebiten.KeyA, PosX: ebiten.KeyD}
+	rightControls := Controls{NegY: ebiten.KeyArrowUp, PosY: ebiten.KeyArrowDown}
+	bottomControls := Controls{NegX: ebiten.KeyArrowLeft, PosX: ebiten.KeyArrowRight}
+	leftControls := Controls{NegY: ebiten.KeyW, PosY: ebiten.KeyS}
 
-		g.bottom.X -= g.paddleSpeed
-		g.left.Y -= g.paddleSpeed
-	} else if ebiten.IsKeyPressed(ebiten.KeyJ) {
-		g.top.X -= g.paddleSpeed
-		g.right.Y -= g.paddleSpeed
-
-		g.bottom.X += g.paddleSpeed
-		g.left.Y += g.paddleSpeed
-	}
+	g.top.Move(topControls)
+	g.right.Move(rightControls)
+	g.bottom.Move(bottomControls)
+	g.left.Move(leftControls)
 
 	const padding = 16
 
