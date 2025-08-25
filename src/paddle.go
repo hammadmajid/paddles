@@ -5,6 +5,7 @@ type Paddle struct {
 	W, H float32
 }
 
+// Clamp the movement of paddle to screen width and height
 func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
 	// Horizontal clamp
 	if p.X < paddingX {
@@ -23,6 +24,7 @@ func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
 	}
 }
 
+// Collides checks if paddle collides with ball
 func (p *Paddle) Collides(ballX, ballY, ballSize float32) bool {
 	return ballX+ballSize >= p.X &&
 		ballX <= p.X+p.W &&

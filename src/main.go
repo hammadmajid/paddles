@@ -50,6 +50,7 @@ func (g *Game) Update() error {
 	g.left.Clamp(screenW, screenH, padding, padding)
 
 	// ball movment and bounce
+	// ball movement and bounce
 	g.ball.Move()
 	g.ball.CheckHorizontalPaddle(g.top, true)
 	g.ball.CheckHorizontalPaddle(g.bottom, false)
