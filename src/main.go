@@ -19,6 +19,7 @@ type GameState int
 const (
 	StateMenu GameState = iota
 	StatePlay
+	StateOver
 )
 
 type Game struct {
@@ -26,10 +27,10 @@ type Game struct {
 
 	menu *Menu
 	play *Play
+	over *Over
 }
 
 func (g *Game) Update() error {
-
 	switch g.state {
 	case StateMenu:
 		g.menu.Update()
@@ -42,7 +43,15 @@ func (g *Game) Update() error {
 			}
 		}
 	case StatePlay:
-		g.play.Update()
+		over := g.play.Update()
+		if over {
+			g.state = StateOver
+		}
+	case StateOver:
+		over := g.over.Update()
+		if over {
+			g.state = StateMenu
+		}
 	}
 	return nil
 }
@@ -54,6 +63,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.menu.Draw(screen)
 	case StatePlay:
 		g.play.Draw(screen)
+	case StateOver:
+		g.over.Draw(screen)
 	}
 }
 
@@ -106,6 +117,7 @@ func main() {
 				Size: 8,
 			},
 		},
+		over: &Over{},
 	}); err != nil {
 		log.Fatal(err)
 	}
