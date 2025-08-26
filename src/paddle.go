@@ -28,6 +28,30 @@ func (p *Paddle) Move(ctrl Controls) {
 	}
 }
 
+type Orientation int
+
+const (
+	Vertical Orientation = iota
+	Horizontal
+)
+
+func (p *Paddle) AutoMove(orientation Orientation, ballX, ballY float32) {
+	switch orientation {
+	case Horizontal:
+		if ballX < p.X {
+			p.X -= 3
+		} else if ballX > p.X {
+			p.X += 3
+		}
+	case Vertical:
+		if ballY < p.Y {
+			p.Y -= 3
+		} else if ballY > p.Y {
+			p.Y += 3
+		}
+	}
+}
+
 // Clamp the movement of paddle to screen width and height
 func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
 	// Horizontal clamp

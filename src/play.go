@@ -25,15 +25,19 @@ func (p *Play) Update() bool {
 	leftOldY := p.left.Y
 
 	// assign keys to control each paddle
-	topControls := Controls{NegX: ebiten.KeyA, PosX: ebiten.KeyD}
-	rightControls := Controls{NegY: ebiten.KeyArrowUp, PosY: ebiten.KeyArrowDown}
+	//topControls := Controls{NegX: ebiten.KeyA, PosX: ebiten.KeyD}
+	//rightControls := Controls{NegY: ebiten.KeyArrowUp, PosY: ebiten.KeyArrowDown}
 	bottomControls := Controls{NegX: ebiten.KeyArrowLeft, PosX: ebiten.KeyArrowRight}
-	leftControls := Controls{NegY: ebiten.KeyW, PosY: ebiten.KeyS}
+	//leftControls := Controls{NegY: ebiten.KeyW, PosY: ebiten.KeyS}
 
-	p.top.Move(topControls)
-	p.right.Move(rightControls)
+	//p.top.Move(topControls)
+	//p.right.Move(rightControls)
 	p.bottom.Move(bottomControls)
-	p.left.Move(leftControls)
+	//p.left.Move(leftControls)
+
+	p.top.AutoMove(Horizontal, p.ball.X, p.ball.Y)
+	p.left.AutoMove(Vertical, p.ball.X, p.ball.Y)
+	p.right.AutoMove(Vertical, p.ball.X, p.ball.Y)
 
 	const padding = 16
 
