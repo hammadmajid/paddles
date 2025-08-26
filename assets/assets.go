@@ -1,4 +1,4 @@
-package main
+package assets
 
 import (
 	_ "embed"
@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-//go:embed Array-Bold.otf
+//go:embed fonts/array/Array-Bold.otf
 var fontBytes []byte
 
 var Face font.Face

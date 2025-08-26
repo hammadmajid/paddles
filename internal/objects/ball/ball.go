@@ -1,4 +1,9 @@
-package main
+package ball
+
+import (
+	"github.com/hammadmajid/paddle/internal/config"
+	"github.com/hammadmajid/paddle/internal/objects/paddle"
+)
 
 type Ball struct {
 	X, Y   float32
@@ -8,8 +13,8 @@ type Ball struct {
 
 // Reset sets the ball to its initial position and velocity
 func (b *Ball) Reset() {
-	b.X = screenW/2 - 4
-	b.Y = screenH/2 - 4
+	b.X = config.ScreenW/2 - 4
+	b.Y = config.ScreenH/2 - 4
 	b.VX = 1.5
 	b.VY = 2.5
 	b.Size = 8
@@ -24,7 +29,7 @@ func (b *Ball) Move() {
 //
 //	fromTop = true  → top paddle (ball placed just below paddle)
 //	fromTop = false → bottom paddle (ball placed just above paddle)
-func (b *Ball) CheckHorizontalPaddle(p Paddle, fromTop bool) {
+func (b *Ball) CheckHorizontalPaddle(p paddle.Paddle, fromTop bool) {
 	if p.Collides(b.X, b.Y, b.Size) {
 		if fromTop {
 			b.Y = p.Y + p.H
@@ -59,7 +64,7 @@ func (b *Ball) CheckHorizontalPaddle(p Paddle, fromTop bool) {
 //
 //	fromLeft = true  → left paddle (ball placed just right of paddle)
 //	fromLeft = false → right paddle (ball placed just left of paddle)
-func (b *Ball) CheckVerticalPaddle(p Paddle, fromLeft bool) {
+func (b *Ball) CheckVerticalPaddle(p paddle.Paddle, fromLeft bool) {
 	if p.Collides(b.X, b.Y, b.Size) {
 		if fromLeft {
 			b.X = p.X + p.W

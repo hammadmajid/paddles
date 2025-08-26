@@ -1,10 +1,11 @@
-package main
+package over
 
 import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
+	"github.com/hammadmajid/paddle/assets"
 	"image/color"
 )
 
@@ -19,6 +20,6 @@ func (o Over) Update() bool {
 
 func (o Over) Draw(screen *ebiten.Image) {
 	y := 100
-	text.Draw(screen, fmt.Sprintf("Game Over"), Face, 100, y, color.White)
-	text.Draw(screen, fmt.Sprintf("> Enter <"), Face, 100, y+40, color.White)
+	text.Draw(screen, fmt.Sprintf("Game Over"), assets.Face, 100, y, color.White)
+	text.Draw(screen, fmt.Sprintf("> Enter <"), assets.Face, 100, y+40, color.White)
 }
