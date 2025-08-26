@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/text"
+	"image/color"
 )
 
 type Menu struct {
@@ -15,9 +16,9 @@ func (m *Menu) Draw(screen *ebiten.Image) {
 	for i, opt := range m.options {
 		y := 100 + i*40
 		if i == m.index {
-			ebitenutil.DebugPrintAt(screen, fmt.Sprintf("> %s <", opt), 100, y)
+			text.Draw(screen, fmt.Sprintf("> %s <", opt), Face, 100, y, color.White)
 		} else {
-			ebitenutil.DebugPrintAt(screen, opt, 120, y)
+			text.Draw(screen, opt, Face, 120, y, color.White)
 		}
 	}
 }
