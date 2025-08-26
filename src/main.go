@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 const (
@@ -34,7 +35,7 @@ func (g *Game) Update() error {
 	switch g.state {
 	case StateMenu:
 		g.menu.Update()
-		if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 			if g.menu.options[g.menu.index] == "Play" {
 				g.state = StatePlay
 			}

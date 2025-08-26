@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"image/color"
 )
@@ -10,7 +11,7 @@ import (
 type Over struct{}
 
 func (o Over) Update() bool {
-	if ebiten.IsKeyPressed(ebiten.KeyEnter) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
 		return true
 	}
 	return false

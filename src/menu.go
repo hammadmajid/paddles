@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"image/color"
 )
@@ -24,13 +25,13 @@ func (m *Menu) Draw(screen *ebiten.Image) {
 }
 
 func (m *Menu) Update() {
-	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowDown) {
 		m.index++
 		if m.index >= len(m.options) {
 			m.index = 0
 		}
 	}
-	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) {
+	if inpututil.IsKeyJustPressed(ebiten.KeyArrowUp) {
 		m.index--
 		if m.index < 0 {
 			m.index = len(m.options) - 1
