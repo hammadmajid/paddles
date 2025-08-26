@@ -14,8 +14,11 @@ type Menu struct {
 }
 
 func (m *Menu) Draw(screen *ebiten.Image) {
+	titleY := 60
+	text.Draw(screen, "Paddles!", Face, 100, titleY, color.White)
+
 	for i, opt := range m.options {
-		y := 100 + i*40
+		y := 120 + i*40
 		if i == m.index {
 			text.Draw(screen, fmt.Sprintf("> %s <", opt), Face, 100, y, color.White)
 		} else {
