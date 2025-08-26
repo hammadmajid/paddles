@@ -37,6 +37,15 @@ func (b *Ball) CheckHorizontalPaddle(p Paddle, fromTop bool) {
 		b.VY = -b.VY
 		b.VX += velocityInfluence // impart horizontal velocity based on paddle movement
 
+		// Add positional influence based on hit location
+		// hitPos: ball center X relative to paddle X
+		hitPos := (b.X + b.Size/2) - p.X
+		relative := hitPos / p.W             // 0 = left edge, 1 = right edge
+		posInfluence := (relative - 0.5) * 2 // -1 (left), 0 (center), 1 (right)
+		// Stronger at edges, weaker at center
+		posInfluence *= abs(relative-0.5) * 2 // nonlinear edge boost
+		b.VX += posInfluence * 2.0            // scale factor for tuning
+
 		// Clamp ball velocity to prevent excessive speeds
 		if b.VX > 3 {
 			b.VX = 3
@@ -62,6 +71,14 @@ func (b *Ball) CheckVerticalPaddle(p Paddle, fromLeft bool) {
 		velocityInfluence := p.VY * 0.3 // scale factor for influence
 		b.VX = -b.VX
 		b.VY += velocityInfluence // impart vertical velocity based on paddle movement
+
+		// Add positional influence based on hit location
+		// hitPos: ball center Y relative to paddle Y
+		hitPos := (b.Y + b.Size/2) - p.Y
+		relative := hitPos / p.H              // 0 = top edge, 1 = bottom edge
+		posInfluence := (relative - 0.5) * 2  // -1 (top), 0 (center), 1 (bottom)
+		posInfluence *= abs(relative-0.5) * 2 // nonlinear edge boost
+		b.VY += posInfluence * 2.0            // scale factor for tuning
 
 		// Clamp ball velocity to prevent excessive speeds
 		if b.VY > 3 {
@@ -98,4 +115,12 @@ func (b *Ball) CheckWalls(screenW, screenH, padding float32) bool {
 	}
 
 	return wall
+}
+
+// abs returns the absolute value of a float32
+func abs(x float32) float32 {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
