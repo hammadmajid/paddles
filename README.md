@@ -32,19 +32,48 @@ A simple Pong game implementation written in Go using the Ebiten 2D game engine.
 ## Running the Game
 
 ```bash
-go run ./src
+# From project root
+# Run the main entrypoint
+
+go run ./cmd/paddles
 ```
 
 Or build and run:
 ```bash
-go build -o paddles ./src
+# Build the binary
+
+go build -o paddles ./cmd/paddles
 ./paddles
+```
+
+## Project Structure
+
+```
+assets/                # Embedded assets (fonts, images)
+  assets.go            # Embeds font(s) for use in game
+  fonts/array/         # Font files
+    Array-Bold.otf
+cmd/paddles/           # Main entrypoint
+  main.go
+internal/config/       # Global game configuration
+  config.go
+internal/objects/ball/ # Ball logic
+  ball.go
+internal/objects/paddle/ # Paddle logic
+  paddle.go
+internal/states/menu/  # Menu screen
+  menu.go
+internal/states/play/  # Play screen
+  play.go
+internal/states/over/  # Game over screen
+  over.go
 ```
 
 ## Development
 
 - **Format code**: `go fmt ./...`
 - **Lint**: `go vet ./...`
+- **Test**: `go test ./...`
 
 ## License
 
