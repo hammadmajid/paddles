@@ -6,6 +6,15 @@ type Ball struct {
 	Size   float32
 }
 
+// Reset sets the ball to its initial position and velocity
+func (b *Ball) Reset() {
+	b.X = screenW/2 - 4
+	b.Y = screenH/2 - 4
+	b.VX = 1.5
+	b.VY = 2.5
+	b.Size = 8
+}
+
 func (b *Ball) Move() {
 	b.X += b.VX
 	b.Y += b.VY
@@ -85,8 +94,7 @@ func (b *Ball) CheckWalls(screenW, screenH, padding float32) bool {
 
 	// Reset position if wall is reached for next game
 	if wall {
-		b.X = screenW / 2
-		b.Y = screenH / 2
+		b.Reset()
 	}
 
 	return wall
