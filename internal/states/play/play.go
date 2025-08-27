@@ -15,8 +15,6 @@ type Play struct {
 	Bottom paddle.Paddle
 	Left   paddle.Paddle
 
-	Speed float32 // movement speed of both paddles
-
 	Ball ball.Ball
 }
 

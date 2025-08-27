@@ -87,8 +87,6 @@ func main() {
 			Bottom: paddle.NewPaddle(paddle.Bottom),
 			Left:   paddle.NewPaddle(paddle.Left),
 
-			Speed: 3,
-
 			Ball: ball.Ball{
 				X:    config.ScreenW/2 - 4,
 				Y:    config.ScreenH/2 - 4,

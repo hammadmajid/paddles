@@ -19,6 +19,8 @@ type Paddle struct {
 	W, H   float32
 	VX, VY float32 // velocity for collision influence
 	Pos    Position
+
+	speed float32
 }
 
 type Controls struct {
@@ -55,28 +57,29 @@ func NewPaddle(pos Position) Paddle {
 	}
 
 	return Paddle{
-		X:   x,
-		Y:   y,
-		W:   w,
-		H:   h,
-		VX:  vx,
-		VY:  vy,
-		Pos: pos,
+		X:     x,
+		Y:     y,
+		W:     w,
+		H:     h,
+		VX:    vx,
+		VY:    vy,
+		Pos:   pos,
+		speed: 3.0,
 	}
 }
 
 func (p *Paddle) Move(ctrl Controls) {
 	if ebiten.IsKeyPressed(ctrl.NegX) {
-		p.X -= 3
+		p.X -= p.speed
 	}
 	if ebiten.IsKeyPressed(ctrl.PosX) {
-		p.X += 3
+		p.X += p.speed
 	}
 	if ebiten.IsKeyPressed(ctrl.NegY) {
-		p.Y -= 3
+		p.Y -= p.speed
 	}
 	if ebiten.IsKeyPressed(ctrl.PosY) {
-		p.Y += 3
+		p.Y += p.speed
 	}
 }
 
@@ -84,15 +87,15 @@ func (p *Paddle) AutoMove(ballX, ballY float32) {
 	switch p.Pos {
 	case Top, Bottom:
 		if ballX < p.X {
-			p.X -= 3
+			p.X -= p.speed
 		} else if ballX > p.X {
-			p.X += 3
+			p.X += p.speed
 		}
 	case Left, Right:
 		if ballY < p.Y {
-			p.Y -= 3
+			p.Y -= p.speed
 		} else if ballY > p.Y {
-			p.Y += 3
+			p.Y += p.speed
 		}
 	}
 }
