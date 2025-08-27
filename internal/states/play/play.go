@@ -64,7 +64,17 @@ func (p *Play) Update() bool {
 	p.Ball.CheckVerticalPaddle(p.Left, true)
 	p.Ball.CheckVerticalPaddle(p.Right, false)
 
-	return p.Ball.CheckWalls(config.ScreenW, config.ScreenH, padding)
+	collides := p.Ball.CheckWalls(config.ScreenW, config.ScreenH, padding)
+	if collides {
+		p.Ball.Reset()
+		p.Top.ResetPosition()
+		p.Right.ResetPosition()
+		p.Bottom.ResetPosition()
+		p.Left.ResetPosition()
+		// return true to indicate game over
+		return true
+	}
+	return false
 }
 
 func (p *Play) Draw(screen *ebiten.Image) {

@@ -126,3 +126,21 @@ func (p *Paddle) Collides(ballX, ballY, ballSize float32) bool {
 		ballY+ballSize >= p.Y &&
 		ballY <= p.Y+p.H
 }
+
+// ResetPosition resets the paddle position to its original position
+func (p *Paddle) ResetPosition() {
+	switch p.Pos {
+	case Top:
+		p.X = (float32(config.ScreenW) - p.W) / 2
+		p.Y = 10 // top padding
+	case Bottom:
+		p.X = (float32(config.ScreenW) - p.W) / 2
+		p.Y = float32(config.ScreenH) - p.H - 10 // bottom padding
+	case Left:
+		p.X = 10 // left padding
+		p.Y = (float32(config.ScreenH) - p.H) / 2
+	case Right:
+		p.X = float32(config.ScreenW) - p.W - 10 // right padding
+		p.Y = (float32(config.ScreenH) - p.H) / 2
+	}
+}
