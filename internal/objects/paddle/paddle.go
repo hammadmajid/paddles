@@ -35,23 +35,23 @@ func NewPaddle(pos Position) Paddle {
 
 	switch pos {
 	case Top:
-		w = float32(config.PaddleW)
-		h = float32(config.PaddleH)
+		w = 64
+		h = 12
 		x = (float32(config.ScreenW) - w) / 2
 		y = 10 // top padding
 	case Bottom:
-		w = float32(config.PaddleW)
-		h = float32(config.PaddleH)
+		w = 64
+		h = 12
 		x = (float32(config.ScreenW) - w) / 2
 		y = float32(config.ScreenH) - h - 10 // bottom padding
 	case Left:
-		w = float32(config.PaddleH)
-		h = float32(config.PaddleW)
+		w = 12
+		h = 64
 		x = 10 // left padding
 		y = (float32(config.ScreenH) - h) / 2
 	case Right:
-		w = float32(config.PaddleH)
-		h = float32(config.PaddleW)
+		w = 12
+		h = 64
 		x = float32(config.ScreenW) - w - 10 // right padding
 		y = (float32(config.ScreenH) - h) / 2
 	}
