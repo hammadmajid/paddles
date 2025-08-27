@@ -1,6 +1,9 @@
 package paddle
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hammadmajid/paddle/internal/config"
+)
 
 type Position int
 
@@ -21,6 +24,45 @@ type Paddle struct {
 type Controls struct {
 	NegX, PosX ebiten.Key // horizontal keys
 	NegY, PosY ebiten.Key // vertical keys
+}
+
+func NewPaddle(pos Position) Paddle {
+	var w, h float32
+	vx, vy := float32(0), float32(0)
+	var x, y float32
+
+	switch pos {
+	case Top:
+		w = float32(config.PaddleW)
+		h = float32(config.PaddleH)
+		x = (float32(config.ScreenW) - w) / 2
+		y = 10 // top padding
+	case Bottom:
+		w = float32(config.PaddleW)
+		h = float32(config.PaddleH)
+		x = (float32(config.ScreenW) - w) / 2
+		y = float32(config.ScreenH) - h - 10 // bottom padding
+	case Left:
+		w = float32(config.PaddleH)
+		h = float32(config.PaddleW)
+		x = 10 // left padding
+		y = (float32(config.ScreenH) - h) / 2
+	case Right:
+		w = float32(config.PaddleH)
+		h = float32(config.PaddleW)
+		x = float32(config.ScreenW) - w - 10 // right padding
+		y = (float32(config.ScreenH) - h) / 2
+	}
+
+	return Paddle{
+		X:   x,
+		Y:   y,
+		W:   w,
+		H:   h,
+		VX:  vx,
+		VY:  vy,
+		Pos: pos,
+	}
 }
 
 func (p *Paddle) Move(ctrl Controls) {

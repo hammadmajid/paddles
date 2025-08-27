@@ -82,34 +82,10 @@ func main() {
 			Index:   0,
 		},
 		play: &play.Play{
-			Top: paddle.Paddle{
-				X:   config.ScreenW/2 - config.PaddleW/2, // center horizontally
-				Y:   0.05 * config.ScreenH,               // near the top
-				W:   config.PaddleW,
-				H:   config.PaddleH,
-				Pos: paddle.Top,
-			},
-			Right: paddle.Paddle{
-				X:   config.ScreenW - 0.05*config.ScreenW - config.PaddleH, // near right edge
-				Y:   config.ScreenH/2 - config.PaddleW/2,                   // centered vertically
-				W:   config.PaddleH,
-				H:   config.PaddleW,
-				Pos: paddle.Right,
-			},
-			Bottom: paddle.Paddle{
-				X:   config.ScreenW/2 - config.PaddleW/2,                   // center horizontally
-				Y:   config.ScreenH - 0.05*config.ScreenH - config.PaddleH, // near the bottom
-				W:   config.PaddleW,
-				H:   config.PaddleH,
-				Pos: paddle.Bottom,
-			},
-			Left: paddle.Paddle{
-				X:   0.05 * config.ScreenW,               // near left edge
-				Y:   config.ScreenH/2 - config.PaddleW/2, // centered vertically
-				W:   config.PaddleH,
-				H:   config.PaddleW,
-				Pos: paddle.Left,
-			},
+			Top:    paddle.NewPaddle(paddle.Top),
+			Right:  paddle.NewPaddle(paddle.Right),
+			Bottom: paddle.NewPaddle(paddle.Bottom),
+			Left:   paddle.NewPaddle(paddle.Left),
 
 			Speed: 3,
 
