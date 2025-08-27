@@ -7,7 +7,6 @@ import (
 	"github.com/hammadmajid/paddle/internal/states/menu"
 	"github.com/hammadmajid/paddle/internal/states/over"
 	"github.com/hammadmajid/paddle/internal/states/play"
-	"image/color"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -57,7 +56,8 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{R: 20, G: 20, B: 20})
+	screen.Fill(config.ColorBase)
+
 	switch g.state {
 	case StateMenu:
 		g.menu.Draw(screen)

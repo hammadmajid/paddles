@@ -6,7 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hammadmajid/paddle/assets"
-	"image/color"
+	"github.com/hammadmajid/paddle/internal/config"
 )
 
 type Over struct{}
@@ -20,6 +20,6 @@ func (o Over) Update() bool {
 
 func (o Over) Draw(screen *ebiten.Image) {
 	y := 100
-	text.Draw(screen, fmt.Sprintf("Game Over"), assets.Face, 100, y, color.White)
-	text.Draw(screen, fmt.Sprintf("> Enter <"), assets.Face, 100, y+40, color.White)
+	text.Draw(screen, fmt.Sprintf("Game Over"), assets.Face, 100, y, config.ColorText)
+	text.Draw(screen, fmt.Sprintf("> Enter <"), assets.Face, 100, y+40, config.ColorText)
 }

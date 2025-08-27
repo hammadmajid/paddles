@@ -6,7 +6,6 @@ import (
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/objects/ball"
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
-	"image/color"
 )
 
 type Play struct {
@@ -69,10 +68,10 @@ func (p *Play) Update() bool {
 }
 
 func (p *Play) Draw(screen *ebiten.Image) {
-	vector.DrawFilledRect(screen, p.Top.X, p.Top.Y, p.Top.W, p.Top.H, color.White, true)
-	vector.DrawFilledRect(screen, p.Right.X, p.Right.Y, p.Right.W, p.Right.H, color.White, true)
-	vector.DrawFilledRect(screen, p.Bottom.X, p.Bottom.Y, p.Bottom.W, p.Bottom.H, color.White, true)
-	vector.DrawFilledRect(screen, p.Left.X, p.Left.Y, p.Left.W, p.Left.H, color.White, true)
+	vector.DrawFilledRect(screen, p.Top.X, p.Top.Y, p.Top.W, p.Top.H, config.ColorLavender, true)
+	vector.DrawFilledRect(screen, p.Right.X, p.Right.Y, p.Right.W, p.Right.H, config.ColorLavender, true)
+	vector.DrawFilledRect(screen, p.Bottom.X, p.Bottom.Y, p.Bottom.W, p.Bottom.H, config.ColorLavender, true)
+	vector.DrawFilledRect(screen, p.Left.X, p.Left.Y, p.Left.W, p.Left.H, config.ColorLavender, true)
 
-	vector.DrawFilledRect(screen, p.Ball.X, p.Ball.Y, p.Ball.Size, p.Ball.Size, color.RGBA{R: 200}, true)
+	vector.DrawFilledRect(screen, p.Ball.X, p.Ball.Y, p.Ball.Size, p.Ball.Size, config.ColorRed, true)
 }

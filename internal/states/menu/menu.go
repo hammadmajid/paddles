@@ -6,7 +6,7 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hammadmajid/paddle/assets"
-	"image/color"
+	"github.com/hammadmajid/paddle/internal/config"
 )
 
 type Menu struct {
@@ -16,14 +16,14 @@ type Menu struct {
 
 func (m *Menu) Draw(screen *ebiten.Image) {
 	titleY := 60
-	text.Draw(screen, "Paddles!", assets.Face, 100, titleY, color.White)
+	text.Draw(screen, "Paddles!", assets.Face, 100, titleY, config.ColorText)
 
 	for i, opt := range m.Options {
 		y := 120 + i*40
 		if i == m.Index {
-			text.Draw(screen, fmt.Sprintf("> %s <", opt), assets.Face, 100, y, color.White)
+			text.Draw(screen, fmt.Sprintf("> %s <", opt), assets.Face, 100, y, config.ColorText)
 		} else {
-			text.Draw(screen, opt, assets.Face, 120, y, color.White)
+			text.Draw(screen, opt, assets.Face, 120, y, config.ColorText)
 		}
 	}
 }
