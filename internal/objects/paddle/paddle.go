@@ -83,19 +83,19 @@ func (p *Paddle) Move(ctrl Controls) {
 	}
 }
 
-func (p *Paddle) AutoMove(ballX, ballY float32) {
+func (p *Paddle) AutoMove(ballX, ballY, ballVX, ballVY float32) {
 	switch p.Pos {
 	case Top, Bottom:
 		if ballX < p.X {
-			p.X -= p.speed
+			p.X -= ballVX
 		} else if ballX > p.X {
-			p.X += p.speed
+			p.X += ballVX
 		}
 	case Left, Right:
 		if ballY < p.Y {
-			p.Y -= p.speed
+			p.Y -= ballVY
 		} else if ballY > p.Y {
-			p.Y += p.speed
+			p.Y += ballVY
 		}
 	}
 }

@@ -35,9 +35,9 @@ func (p *Play) Update() bool {
 	p.Bottom.Move(bottomControls)
 	//p.Left.Move(leftControls)
 
-	p.Top.AutoMove(p.Ball.X, p.Ball.Y)
-	p.Left.AutoMove(p.Ball.X, p.Ball.Y)
-	p.Right.AutoMove(p.Ball.X, p.Ball.Y)
+	p.Top.AutoMove(p.Ball.X, p.Ball.Y, p.Ball.VX, p.Ball.VY)
+	p.Left.AutoMove(p.Ball.X, p.Ball.Y, p.Ball.VX, p.Ball.VY)
+	p.Right.AutoMove(p.Ball.X, p.Ball.Y, p.Ball.VX, p.Ball.VY)
 
 	const padding = 16
 
