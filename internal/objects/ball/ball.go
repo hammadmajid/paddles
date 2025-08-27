@@ -5,19 +5,30 @@ import (
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
 )
 
+var defaultBall = Ball{
+	X:    config.ScreenW/2 - 4,
+	Y:    config.ScreenH/2 - 4,
+	VX:   1.5,
+	VY:   2.5,
+	Size: 8,
+}
+
 type Ball struct {
 	X, Y   float32
 	VX, VY float32
 	Size   float32
 }
 
+func NewBall() Ball {
+	return defaultBall
+}
+
 // Reset sets the ball to its initial position and velocity
 func (b *Ball) Reset() {
-	b.X = config.ScreenW/2 - 4
-	b.Y = config.ScreenH/2 - 4
-	b.VX = 1.5
-	b.VY = 2.5
-	b.Size = 8
+	b.X = defaultBall.X
+	b.Y = defaultBall.Y
+	b.VX = defaultBall.VX
+	b.VY = defaultBall.VY
 }
 
 func (b *Ball) Move() {

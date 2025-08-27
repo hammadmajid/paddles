@@ -87,13 +87,7 @@ func main() {
 			Bottom: paddle.NewPaddle(paddle.Bottom),
 			Left:   paddle.NewPaddle(paddle.Left),
 
-			Ball: ball.Ball{
-				X:    config.ScreenW/2 - 4,
-				Y:    config.ScreenH/2 - 4,
-				VX:   1.5,
-				VY:   2.5,
-				Size: 8,
-			},
+			Ball: ball.NewBall(),
 		},
 		over: &over.Over{},
 	}); err != nil {
