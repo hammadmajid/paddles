@@ -2,10 +2,20 @@ package paddle
 
 import "github.com/hajimehoshi/ebiten/v2"
 
+type Position int
+
+const (
+	Top Position = iota
+	Right
+	Bottom
+	Left
+)
+
 type Paddle struct {
 	X, Y   float32
 	W, H   float32
 	VX, VY float32 // velocity for collision influence
+	Pos    Position
 }
 
 type Controls struct {
@@ -28,22 +38,15 @@ func (p *Paddle) Move(ctrl Controls) {
 	}
 }
 
-type Orientation int
-
-const (
-	Vertical Orientation = iota
-	Horizontal
-)
-
-func (p *Paddle) AutoMove(orientation Orientation, ballX, ballY float32) {
-	switch orientation {
-	case Horizontal:
+func (p *Paddle) AutoMove(ballX, ballY float32) {
+	switch p.Pos {
+	case Top | Bottom:
 		if ballX < p.X {
 			p.X -= 3
 		} else if ballX > p.X {
 			p.X += 3
 		}
-	case Vertical:
+	case Left | Right:
 		if ballY < p.Y {
 			p.Y -= 3
 		} else if ballY > p.Y {
