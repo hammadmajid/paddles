@@ -82,13 +82,13 @@ func (p *Paddle) Move(ctrl Controls) {
 
 func (p *Paddle) AutoMove(ballX, ballY float32) {
 	switch p.Pos {
-	case Top | Bottom:
+	case Top, Bottom:
 		if ballX < p.X {
 			p.X -= 3
 		} else if ballX > p.X {
 			p.X += 3
 		}
-	case Left | Right:
+	case Left, Right:
 		if ballY < p.Y {
 			p.Y -= 3
 		} else if ballY > p.Y {
