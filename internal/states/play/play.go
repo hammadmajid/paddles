@@ -59,10 +59,10 @@ func (p *Play) Update() bool {
 
 	// Ball movement and bounce
 	p.Ball.Move()
-	p.Ball.CheckHorizontalPaddle(p.Top, true)
-	p.Ball.CheckHorizontalPaddle(p.Bottom, false)
-	p.Ball.CheckVerticalPaddle(p.Left, true)
-	p.Ball.CheckVerticalPaddle(p.Right, false)
+	p.Ball.Bounce(p.Top)
+	p.Ball.Bounce(p.Bottom)
+	p.Ball.Bounce(p.Left)
+	p.Ball.Bounce(p.Right)
 
 	collides := p.Ball.CheckWalls(config.ScreenW, config.ScreenH, padding)
 	if collides {
