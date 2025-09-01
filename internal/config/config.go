@@ -3,8 +3,16 @@ package config
 import "image/color"
 
 const (
-	ScreenW = 640.0
-	ScreenH = 480.0
+	ScreenW         = 640.0
+	ScreenH         = 480.0
+	PaddingDefault  = 16.0
+	PaddingEdge     = 10.0
+	PaddleSpeed     = 3.0
+	BallSpeed       = 1.5
+	BallSpeedY      = 2.5
+	BallSize        = 8.0
+	PaddleThickness = 12.0
+	PaddleLength    = 64.0
 )
 
 // Cattppuccin Mocha Palette

@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/hammadmajid/paddle/internal/config"
+	"github.com/hammadmajid/paddle/internal/interfaces"
 	"github.com/hammadmajid/paddle/internal/objects/ball"
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
 	"github.com/hammadmajid/paddle/internal/states/menu"
@@ -11,89 +12,74 @@ import (
 	"github.com/hammadmajid/paddle/internal/states/play"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
-)
-
-type GameState int
-
-const (
-	StateMenu GameState = iota
-	StatePlay
-	StateOver
 )
 
 type Game struct {
-	state GameState
+	currentState interfaces.StateType
+	states       map[interfaces.StateType]interfaces.GameState
+}
 
-	menu *menu.Menu
-	play *play.Play
-	over *over.Over
+func NewGame() *Game {
+	return &Game{
+		currentState: interfaces.StateMenu,
+		states: map[interfaces.StateType]interfaces.GameState{
+			interfaces.StateMenu: &menu.Menu{
+				Options: []string{"Play", "Quit"},
+				Index:   0,
+			},
+			interfaces.StatePlay: &play.Play{
+				Paddles: []paddle.Paddle{
+					paddle.NewPaddle(paddle.Top),
+					paddle.NewPaddle(paddle.Right),
+					paddle.NewPaddle(paddle.Bottom),
+					paddle.NewPaddle(paddle.Left),
+				},
+				Ball: ball.NewBall(),
+			},
+			interfaces.StateOver: &over.Over{},
+		},
+	}
 }
 
 func (g *Game) Update() error {
-	switch g.state {
-	case StateMenu:
-		g.menu.Update()
-		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-			if g.menu.Options[g.menu.Index] == "Play" {
-				g.state = StatePlay
+	state := g.states[g.currentState]
+	transition := state.Update()
+
+	if transition.ShouldExit {
+		return ebiten.Termination
+	}
+
+	if transition.ShouldTransition {
+		g.currentState = transition.NewState
+		if g.currentState == interfaces.StatePlay {
+			g.states[interfaces.StatePlay] = &play.Play{
+				Paddles: []paddle.Paddle{
+					paddle.NewPaddle(paddle.Top),
+					paddle.NewPaddle(paddle.Right),
+					paddle.NewPaddle(paddle.Bottom),
+					paddle.NewPaddle(paddle.Left),
+				},
+				Ball: ball.NewBall(),
 			}
-			if g.menu.Options[g.menu.Index] == "Quit" {
-				return ebiten.Termination
-			}
-		}
-	case StatePlay:
-		stateChanged := g.play.Update()
-		if stateChanged {
-			g.state = StateOver
-		}
-	case StateOver:
-		stateChanged := g.over.Update()
-		if stateChanged {
-			g.state = StateMenu
 		}
 	}
+
 	return nil
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(config.ColorBase)
-
-	switch g.state {
-	case StateMenu:
-		g.menu.Draw(screen)
-	case StatePlay:
-		g.play.Draw(screen)
-	case StateOver:
-		g.over.Draw(screen)
-	}
+	g.states[g.currentState].Draw(screen)
 }
 
-//goland:noinspection GoUnusedParameter
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return config.ScreenW, config.ScreenH
+	return int(config.ScreenW), int(config.ScreenH)
 }
 
 func main() {
-	ebiten.SetWindowSize(config.ScreenW, config.ScreenH)
+	ebiten.SetWindowSize(int(config.ScreenW), int(config.ScreenH))
 	ebiten.SetWindowTitle("Paddles")
-	if err := ebiten.RunGame(&Game{
-		menu: &menu.Menu{
-			Options: []string{"Play", "Quit"},
-			Index:   0,
-		},
-		play: &play.Play{
-			Paddles: []paddle.Paddle{
-				paddle.NewPaddle(paddle.Top),
-				paddle.NewPaddle(paddle.Right),
-				paddle.NewPaddle(paddle.Bottom),
-				paddle.NewPaddle(paddle.Left),
-			},
-
-			Ball: ball.NewBall(),
-		},
-		over: &over.Over{},
-	}); err != nil {
+	if err := ebiten.RunGame(NewGame()); err != nil {
 		log.Fatal(err)
 	}
 }

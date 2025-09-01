@@ -2,20 +2,25 @@ package over
 
 import (
 	"fmt"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hammadmajid/paddle/assets"
 	"github.com/hammadmajid/paddle/internal/config"
+	"github.com/hammadmajid/paddle/internal/interfaces"
 )
 
 type Over struct{}
 
-func (o Over) Update() bool {
+func (o Over) Update() interfaces.StateTransition {
 	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-		return true
+		return interfaces.StateTransition{
+			ShouldTransition: true,
+			NewState:         interfaces.StateMenu,
+		}
 	}
-	return false
+	return interfaces.StateTransition{}
 }
 
 func (o Over) Draw(screen *ebiten.Image) {
