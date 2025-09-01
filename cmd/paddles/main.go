@@ -1,13 +1,14 @@
 package main
 
 import (
+	"log"
+
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/objects/ball"
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
 	"github.com/hammadmajid/paddle/internal/states/menu"
 	"github.com/hammadmajid/paddle/internal/states/over"
 	"github.com/hammadmajid/paddle/internal/states/play"
-	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -82,10 +83,12 @@ func main() {
 			Index:   0,
 		},
 		play: &play.Play{
-			Top:    paddle.NewPaddle(paddle.Top),
-			Right:  paddle.NewPaddle(paddle.Right),
-			Bottom: paddle.NewPaddle(paddle.Bottom),
-			Left:   paddle.NewPaddle(paddle.Left),
+			Paddles: []paddle.Paddle{
+				paddle.NewPaddle(paddle.Top),
+				paddle.NewPaddle(paddle.Right),
+				paddle.NewPaddle(paddle.Bottom),
+				paddle.NewPaddle(paddle.Left),
+			},
 
 			Ball: ball.NewBall(),
 		},
