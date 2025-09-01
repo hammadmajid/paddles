@@ -18,12 +18,6 @@ type Play struct {
 }
 
 func (p *Play) Update() bool {
-	// Store previous positions to calculate velocity
-	topOldX := p.Top.X
-	rightOldY := p.Right.Y
-	bottomOldX := p.Bottom.X
-	leftOldY := p.Left.Y
-
 	// assign keys to control each paddle
 	//topControls := Controls{NegX: ebiten.KeyA, PosX: ebiten.KeyD}
 	//rightControls := Controls{NegY: ebiten.KeyArrowUp, PosY: ebiten.KeyArrowDown}
@@ -46,16 +40,6 @@ func (p *Play) Update() bool {
 	p.Right.Clamp(config.ScreenW, config.ScreenH, padding, padding)
 	p.Bottom.Clamp(config.ScreenW, config.ScreenH, padding, padding)
 	p.Left.Clamp(config.ScreenW, config.ScreenH, padding, padding)
-
-	// Calculate paddle velocities
-	p.Top.VX = p.Top.X - topOldX
-	p.Top.VY = 0
-	p.Right.VX = 0
-	p.Right.VY = p.Right.Y - rightOldY
-	p.Bottom.VX = p.Bottom.X - bottomOldX
-	p.Bottom.VY = 0
-	p.Left.VX = 0
-	p.Left.VY = p.Left.Y - leftOldY
 
 	// Ball movement and bounce
 	p.Ball.Move()

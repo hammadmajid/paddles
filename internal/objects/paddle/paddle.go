@@ -15,10 +15,9 @@ const (
 )
 
 type Paddle struct {
-	X, Y   float32
-	W, H   float32
-	VX, VY float32 // velocity for collision influence
-	Pos    Position
+	X, Y float32
+	W, H float32
+	Pos  Position
 
 	speed float32
 }
@@ -30,7 +29,6 @@ type Controls struct {
 
 func NewPaddle(pos Position) Paddle {
 	var w, h float32
-	vx, vy := float32(0), float32(0)
 	var x, y float32
 
 	switch pos {
@@ -61,8 +59,6 @@ func NewPaddle(pos Position) Paddle {
 		Y:     y,
 		W:     w,
 		H:     h,
-		VX:    vx,
-		VY:    vy,
 		Pos:   pos,
 		speed: 3.0,
 	}
