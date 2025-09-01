@@ -6,6 +6,7 @@ import (
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/objects/ball"
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
+	"github.com/hammadmajid/paddle/internal/score"
 	"github.com/hammadmajid/paddle/internal/states/menu"
 	"github.com/hammadmajid/paddle/internal/states/over"
 	"github.com/hammadmajid/paddle/internal/states/play"
@@ -51,6 +52,7 @@ func (g *Game) Update() error {
 		stateChanged := g.over.Update()
 		if stateChanged {
 			g.state = StateMenu
+			score.Reset()
 		}
 	}
 	return nil

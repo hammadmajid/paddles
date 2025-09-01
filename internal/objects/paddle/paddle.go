@@ -3,6 +3,7 @@ package paddle
 import (
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hammadmajid/paddle/internal/config"
+	"github.com/hammadmajid/paddle/internal/score"
 )
 
 type Position int
@@ -117,10 +118,15 @@ func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
 
 // Collides checks if paddle collides with ball
 func (p *Paddle) Collides(ballX, ballY, ballSize float32) bool {
-	return ballX+ballSize >= p.X &&
+	// inside Collides
+	if ballX+ballSize >= p.X &&
 		ballX <= p.X+p.W &&
 		ballY+ballSize >= p.Y &&
-		ballY <= p.Y+p.H
+		ballY <= p.Y+p.H {
+		score.Inc() // atomic
+		return true
+	}
+	return false
 }
 
 // ResetPosition resets the paddle position to its original position
