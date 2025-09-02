@@ -1,6 +1,8 @@
 package paddle
 
 import (
+	"image/color"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/score"
@@ -16,11 +18,13 @@ const (
 )
 
 type Paddle struct {
-	X, Y float32
-	W, H float32
-	Pos  Position
+	X, Y  float32
+	W, H  float32
+	Pos   Position
+	Color color.Color
 
-	speed float32
+	colorTimer int32
+	speed      float32
 }
 
 type Controls struct {
@@ -56,12 +60,14 @@ func NewPaddle(pos Position) Paddle {
 	}
 
 	return Paddle{
-		X:     x,
-		Y:     y,
-		W:     w,
-		H:     h,
-		Pos:   pos,
-		speed: 3.0,
+		X:          x,
+		Y:          y,
+		W:          w,
+		H:          h,
+		Pos:        pos,
+		Color:      config.ColorLavender,
+		colorTimer: 0,
+		speed:      3.0,
 	}
 }
 
@@ -118,15 +124,28 @@ func (p *Paddle) Clamp(screenW, screenH float32, paddingX, paddingY float32) {
 
 // Collides checks if paddle collides with ball
 func (p *Paddle) Collides(ballX, ballY, ballSize float32) bool {
-	// inside Collides
 	if ballX+ballSize >= p.X &&
 		ballX <= p.X+p.W &&
 		ballY+ballSize >= p.Y &&
 		ballY <= p.Y+p.H {
-		score.Inc() // atomic
+
+		score.Inc()
+
+		p.Color = config.ColorPeach
+		p.colorTimer = 12
+
 		return true
 	}
 	return false
+}
+
+func (p *Paddle) UpdateColor() {
+	if p.colorTimer > 0 {
+		p.colorTimer--
+		if p.colorTimer == 0 {
+			p.Color = config.ColorLavender
+		}
+	}
 }
 
 // ResetPosition resets the paddle position to its original position

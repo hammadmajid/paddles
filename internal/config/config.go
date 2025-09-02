@@ -14,4 +14,5 @@ var (
 	ColorText     = color.RGBA{R: 205, G: 214, B: 244}
 	ColorLavender = color.RGBA{R: 180, G: 190, B: 254}
 	ColorRed      = color.RGBA{R: 243, G: 139, B: 168}
+	ColorPeach    = color.RGBA{R: 250, G: 179, B: 135}
 )
