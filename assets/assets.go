@@ -22,11 +22,15 @@ var bgmBytes []byte
 //go:embed music/8-bit-laser-151672.mp3
 var hitEffectBytes []byte
 
+//go:embed music/gamestart-272829.mp3
+var gameStartBytes []byte
+
 const sampleRate = 44100
 
 var AudioContext *audio.Context
 var BGMPlayer *audio.Player
 var HitEffectPlayer *audio.Player
+var GameStartPlayer *audio.Player
 
 func init() {
 	// font
@@ -62,8 +66,16 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//hitEffect := audio.NewInfiniteLoop(hitEffectStream, hitEffectStream.Length())
 	HitEffectPlayer, err = AudioContext.NewPlayer(hitEffectStream)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	gameStartStream, err := mp3.DecodeWithSampleRate(sampleRate, bytes.NewReader(gameStartBytes))
+	if err != nil {
+		log.Fatal(err)
+	}
+	GameStartPlayer, err = AudioContext.NewPlayer(gameStartStream)
 	if err != nil {
 		log.Fatal(err)
 	}

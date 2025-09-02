@@ -1,6 +1,7 @@
 package ball
 
 import (
+	"github.com/hammadmajid/paddle/assets"
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/objects/paddle"
 )
@@ -63,22 +64,29 @@ func (b *Ball) Bounce(p paddle.Paddle) {
 
 // CheckWalls return true and resets the ball position if it touches any wall
 func (b *Ball) CheckWalls(screenW, screenH, padding float32) bool {
+	collides := false
+
 	// Left wall
 	if b.X < padding {
-		return true
+		collides = true
 	}
 	// Right wall
 	if b.X+b.Size > screenW-padding {
-		return true
+		collides = true
 	}
 	// Top wall
 	if b.Y < padding {
-		return true
+		collides = true
 	}
 	// Bottom wall
 	if b.Y+b.Size > screenH-padding {
-		return true
+		collides = true
 	}
 
-	return false
+	if collides {
+		assets.GameStartPlayer.Rewind()
+		assets.GameStartPlayer.Play()
+	}
+
+	return collides
 }
