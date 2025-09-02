@@ -30,7 +30,9 @@ func (p *Play) Update() bool {
 			p.Paddles[i].AutoMove(p.Ball.X, p.Ball.Y, p.Ball.VX, p.Ball.VY)
 		}
 		p.Paddles[i].Clamp(config.ScreenW, config.ScreenH, padding, padding)
-		p.Ball.Bounce(p.Paddles[i])
+		if p.Paddles[i].Collides(p.Ball.X, p.Ball.Y, p.Ball.Size) {
+			p.Ball.Bounce(p.Paddles[i])
+		}
 	}
 
 	collides := p.Ball.CheckWalls(config.ScreenW, config.ScreenH, padding)

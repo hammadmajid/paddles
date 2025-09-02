@@ -37,29 +37,27 @@ func (b *Ball) Move() {
 }
 
 func (b *Ball) Bounce(p paddle.Paddle) {
-	if p.Collides(b.X, b.Y, b.Size) {
-		switch p.Pos {
-		case paddle.Top:
-			// bounce
-			b.Y = p.Y + p.H
-			// invert velocity
-			b.VY = -b.VY
-		case paddle.Right:
-			// bounce
-			b.X = p.X - b.Size
-			// invert velocity
-			b.VX = -b.VX
-		case paddle.Bottom:
-			// bounce
-			b.Y = p.Y - b.Size
-			// invert velocity
-			b.VY = -b.VY
-		case paddle.Left:
-			// bounce
-			b.X = p.X + p.W
-			// invert velocity
-			b.VX = -b.VX
-		}
+	switch p.Pos {
+	case paddle.Top:
+		// bounce
+		b.Y = p.Y + p.H
+		// invert velocity
+		b.VY = -b.VY
+	case paddle.Right:
+		// bounce
+		b.X = p.X - b.Size
+		// invert velocity
+		b.VX = -b.VX
+	case paddle.Bottom:
+		// bounce
+		b.Y = p.Y - b.Size
+		// invert velocity
+		b.VY = -b.VY
+	case paddle.Left:
+		// bounce
+		b.X = p.X + p.W
+		// invert velocity
+		b.VX = -b.VX
 	}
 }
 
