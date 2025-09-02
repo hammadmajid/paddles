@@ -82,11 +82,3 @@ func (b *Ball) CheckWalls(screenW, screenH, padding float32) bool {
 
 	return false
 }
-
-// abs returns the absolute value of a float32
-func abs(x float32) float32 {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
