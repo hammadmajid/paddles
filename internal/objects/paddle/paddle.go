@@ -4,6 +4,7 @@ import (
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hammadmajid/paddle/assets"
 	"github.com/hammadmajid/paddle/internal/config"
 	"github.com/hammadmajid/paddle/internal/score"
 )
@@ -133,6 +134,9 @@ func (p *Paddle) Collides(ballX, ballY, ballSize float32) bool {
 
 		p.Color = config.ColorPeach
 		p.colorTimer = 12
+
+		assets.HitEffectPlayer.Rewind()
+		assets.HitEffectPlayer.Play()
 
 		return true
 	}

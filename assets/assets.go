@@ -19,10 +19,14 @@ var Face font.Face
 //go:embed music/8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.mp3
 var bgmBytes []byte
 
+//go:embed music/8-bit-laser-151672.mp3
+var hitEffectBytes []byte
+
 const sampleRate = 44100
 
 var AudioContext *audio.Context
 var BGMPlayer *audio.Player
+var HitEffectPlayer *audio.Player
 
 func init() {
 	// font
@@ -41,15 +45,29 @@ func init() {
 
 	// audio
 	AudioContext = audio.NewContext(sampleRate)
-	stream, err := mp3.DecodeWithSampleRate(sampleRate, bytes.NewReader(bgmBytes))
-	if err != nil {
-		log.Fatal(err)
-	}
-	loop := audio.NewInfiniteLoop(stream, stream.Length())
-	BGMPlayer, err = AudioContext.NewPlayer(loop)
+
+	bgmStream, err := mp3.DecodeWithSampleRate(sampleRate, bytes.NewReader(bgmBytes))
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	bgmLoop := audio.NewInfiniteLoop(bgmStream, bgmStream.Length())
+
+	BGMPlayer, err = AudioContext.NewPlayer(bgmLoop)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	hitEffectStream, err := mp3.DecodeWithSampleRate(sampleRate, bytes.NewReader(hitEffectBytes))
+	if err != nil {
+		log.Fatal(err)
+	}
+	//hitEffect := audio.NewInfiniteLoop(hitEffectStream, hitEffectStream.Length())
+	HitEffectPlayer, err = AudioContext.NewPlayer(hitEffectStream)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	BGMPlayer.SetVolume(0.6)
 	BGMPlayer.Play()
 }
